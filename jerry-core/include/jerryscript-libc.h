@@ -60,9 +60,18 @@ ST_FUNC void *dlsym(void *handle, const char *symbol)
 
 #endif
 
-//void *memset(void *s, int c, size_t n);
+//TODO if using libc static, do below, otherwise do dlsym + macro later.
 #ifndef _JERRY_LIBC_H
 #define _JERRY_LIBC_H
+
+#if defined JERRY_USING_LIBDL && JERRY_USING_LIBDL
+
+#define LIBC(sym) jerry_syms[JERY_SYM_##sym];
+
+#else
+
+#define LIBC(sym) sym
+
 //#include <stddef.h>
 //#include <stdio.h>
 //void *memcpy(void *dest, const void *src, size_t n);
@@ -156,6 +165,5 @@ int gettimeofday (struct timeval *tv,
 #endif//DEFINED_benchmarking
 #endif
 
+#endif//JERRY_USING_LIBDL
 #endif//_JERRY_LIBC_H
-
-

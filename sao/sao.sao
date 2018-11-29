@@ -1,0 +1,11 @@
+//if(true){
+//	print ("YES JerryScript-x-Sao!");
+//}else{
+//	print ("NO JerryScript-x-Sao!");
+//}
+
+@?(true){
+	print ("SAO YES JerryScript-x-Sao!");
+}else{
+	print ("SAO NO JerryScript-x-Sao!");
+}

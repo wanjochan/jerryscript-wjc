@@ -1135,6 +1135,17 @@ lexer_next_token (parser_context_t *context_p) /**< context */
 
   switch (context_p->source_p[0])
   {
+#ifndef CONFIG_DISABLE_SAOLANG //{
+		case (uint8_t) LIT_CHAR_AT:
+		{
+			if (context_p->source_p[1] == (uint8_t) LIT_CHAR_QUESTION)
+			{
+				context_p->token.type = LEXER_KEYW_IF;
+				length = 2;
+				break;
+			}
+		}
+#endif /*} CONFIG_DISABLE_SAOLANG */
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_BRACE, LEXER_LEFT_BRACE);
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_PAREN, LEXER_LEFT_PAREN);
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_SQUARE, LEXER_LEFT_SQUARE);

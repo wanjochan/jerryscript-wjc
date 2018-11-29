@@ -141,6 +141,11 @@ def get_arguments():
     coregrp.add_argument('--vm-exec-stop', metavar='X', choices=['ON', 'OFF'], type=str.upper,
                          help='enable VM execution stopping (%(choices)s)')
 
+    coregrp.add_argument('--saolang', metavar='X', choices=['ON', 'OFF'], type=str.upper, default="ON",
+                         help='support saolang (default: %(default)s)')
+    coregrp.add_argument('--saolang-only', metavar='X', choices=['ON', 'OFF'], type=str.upper, default="OFF",
+                         help='support saolang ONLY (default: %(default)s)')
+    
     maingrp = parser.add_argument_group('jerry-main options')
     maingrp.add_argument('--link-map', metavar='X', choices=['ON', 'OFF'], type=str.upper,
                          help=devhelp('enable the generation of link map for jerry command line tool (%(choices)s)'))
@@ -201,6 +206,10 @@ def generate_build_options(arguments):
     build_options_append('FEATURE_SYSTEM_ALLOCATOR', arguments.system_allocator)
     build_options_append('FEATURE_VALGRIND', arguments.valgrind)
     build_options_append('FEATURE_VM_EXEC_STOP', arguments.vm_exec_stop)
+
+    # saolang
+    build_options_append('FEATURE_SAOLANG', arguments.saolang)
+    build_options_append('FEATURE_SAOLANG_ONLY', arguments.saolang_only)
 
     # jerry-main options
     build_options_append('ENABLE_LINK_MAP', arguments.link_map)
