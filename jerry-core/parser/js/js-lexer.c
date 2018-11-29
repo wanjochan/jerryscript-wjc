@@ -1143,6 +1143,10 @@ lexer_next_token (parser_context_t *context_p) /**< context */
 				context_p->token.type = LEXER_KEYW_IF;
 				length = 2;
 				break;
+			}else if(context_p->source_p[1] == (uint8_t) LIT_CHAR_COLON){
+				context_p->token.type = LEXER_KEYW_ELSE;
+				length = 2;
+				break;
 			}
 		}
 #endif /*} CONFIG_DISABLE_SAOLANG */

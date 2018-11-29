@@ -6,6 +6,6 @@
 
 @?(true){
 	print ("SAO YES JerryScript-x-Sao!");
-}else{
+}@:{
 	print ("SAO NO JerryScript-x-Sao!");
 }
