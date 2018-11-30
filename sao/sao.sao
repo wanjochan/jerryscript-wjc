@@ -1,5 +1,13 @@
 //TODO make Math with import later...
 
+//TODO import
+//@<Math>;
+//@<print>;
+
+@^ uu(x,y){
+	@~ x*y;
+}
+
 ttt = (x, y)=>1.0*Math.pow(x+y,0.5);//sqrt
 
 f = (c)=>{
@@ -11,6 +19,7 @@ f = (c)=>{
 	}@:{
 		print ("ELSE BR");
 	}
+	@~;
 };
 
 f(1);
@@ -18,3 +27,9 @@ f(2);
 f(3);
 
 print(ttt(3.0*3.0,4.0*4.0));
+print(uu(3.0,4.0));
+
+//TODO export
+//@();
+//@{};
+//@[];

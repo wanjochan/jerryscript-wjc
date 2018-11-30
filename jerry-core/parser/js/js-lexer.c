@@ -1143,27 +1143,72 @@ lexer_next_token (parser_context_t *context_p) /**< context */
   {
 #ifdef JERRY_SAOLANG//{
 		case (uint8_t) LIT_CHAR_AT:
-		{
-			if (context_p->source_p[1] == (uint8_t) LIT_CHAR_QUESTION)
 			{
-				context_p->token.type = LEXER_KEYW_IF;
-				length = 2;
-				break;
-			}else if(context_p->source_p[1] == (uint8_t) LIT_CHAR_COLON){
-				if(context_p->source_p[2] == (uint8_t) LIT_CHAR_QUESTION){
-					//TODO ELSEIF
-					parser_raise_error (context_p, PARSER_ERR_SYNTAX_UNSUPPORTED_YET);
-					//context_p->token.type = LEXER_KEYW_ELSEIF;
-					//length = 2;
-					break;
-				}else{
-					context_p->token.type = LEXER_KEYW_ELSE;
+				//
+				if(context_p->source_p[1] == LIT_CHAR_CIRCUMFLEX){//@^ => function
+					context_p->token.type = LEXER_KEYW_FUNCTION;
 					length = 2;
 					break;
+				}else if(context_p->source_p[1] == LIT_CHAR_ASTERISK){//@* => all => for loop
+					context_p->token.type = LEXER_KEYW_FOR;
+					length = 2;
+					break;
+				}else if(context_p->source_p[1] == LIT_CHAR_EQUALS){//@= => case/default
+					if(context_p->source_p[2] == (uint8_t) LIT_CHAR_COLON){
+						context_p->token.type = LEXER_KEYW_DEFAULT;
+						length = 2;
+						break;
+					}else{
+						context_p->token.type = LEXER_KEYW_CASE;
+						length = 2;
+						break;
+					}
+				}else if(context_p->source_p[1] == LIT_CHAR_TILDE){//@~ => return
+					context_p->token.type = LEXER_KEYW_RETURN;
+					length = 2;
+					break;
+				}else if(context_p->source_p[1] == LIT_CHAR_EXCLAMATION){//@! => astonished => break
+					context_p->token.type = LEXER_KEYW_BREAK;
+					length = 2;
+					break;
+				}else if(context_p->source_p[1] == LIT_CHAR_DOLLAR_SIGN){//@$ => while
+					context_p->token.type = LEXER_KEYW_WHILE;
+					length = 2;
+					break;
+				}else if(context_p->source_p[1] == LIT_CHAR_PERCENT){//@% => continue
+					context_p->token.type = LEXER_KEYW_CONTINUE;
+					length = 2;
+					break;
+				}else if(context_p->source_p[1] == LIT_CHAR_HASH){//@# => switch
+					context_p->token.type = LEXER_KEYW_SWITCH;
+					length = 2;
+					break;
+				}else if(context_p->source_p[1] == LIT_CHAR_UNDERSCORE){//@_ => bottom line => jus DO it
+					context_p->token.type = LEXER_KEYW_DO;
+					length = 2;
+					break;
+				}else if(context_p->source_p[1] == LIT_CHAR_QUESTION){//@? => if
+					context_p->token.type = LEXER_KEYW_IF;
+					length = 2;
+					break;
+				}else if(context_p->source_p[1]==LIT_CHAR_COLON){//@:
+					if(context_p->source_p[2] == (uint8_t) LIT_CHAR_QUESTION){
+						//TODO @:? => ELSEIF
+						//context_p->token.type = LEXER_KEYW_ELSEIF;
+						//length = 2;
+						parser_raise_error (context_p, PARSER_ERR_SYNTAX_UNSUPPORTED_YET);
+						break;
+					}else{
+						context_p->token.type = LEXER_KEYW_ELSE;
+						length = 2;
+						break;
+					}
 				}
+				//default as "this"
+				context_p->token.type = LEXER_KEYW_THIS;
+				break;
 			}
-		}
-#endif // JERRY_SAOLANG
+#endif //}JERRY_SAOLANG
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_BRACE, LEXER_LEFT_BRACE);
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_PAREN, LEXER_LEFT_PAREN);
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_SQUARE, LEXER_LEFT_SQUARE);

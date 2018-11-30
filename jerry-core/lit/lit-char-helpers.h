@@ -89,11 +89,12 @@ bool lit_char_is_identifier_part_character (ecma_char_t chr);
 #define LIT_CHAR_RIGHT_PAREN  ((ecma_char_t) ')') /* right parenthesis */
 #define LIT_CHAR_LEFT_SQUARE  ((ecma_char_t) '[') /* left square bracket */
 #define LIT_CHAR_RIGHT_SQUARE ((ecma_char_t) ']') /* right square bracket */
+#define LIT_CHAR_LESS_THAN    ((ecma_char_t) '<') /* less-than sign */
+#define LIT_CHAR_GREATER_THAN ((ecma_char_t) '>') /* greater-than sign */
+
 #define LIT_CHAR_DOT          ((ecma_char_t) '.') /* dot */
 #define LIT_CHAR_SEMICOLON    ((ecma_char_t) ';') /* semicolon */
 #define LIT_CHAR_COMMA        ((ecma_char_t) ',') /* comma */
-#define LIT_CHAR_LESS_THAN    ((ecma_char_t) '<') /* less-than sign */
-#define LIT_CHAR_GREATER_THAN ((ecma_char_t) '>') /* greater-than sign */
 #define LIT_CHAR_EQUALS       ((ecma_char_t) '=') /* equals sign */
 #define LIT_CHAR_PLUS         ((ecma_char_t) '+') /* plus sign */
 #define LIT_CHAR_MINUS        ((ecma_char_t) '-') /* hyphen-minus */
@@ -109,6 +110,7 @@ bool lit_char_is_identifier_part_character (ecma_char_t chr);
 
 #ifdef JERRY_SAOLANG//{
 #define LIT_CHAR_AT           ((ecma_char_t) '@') /* AT */
+#define LIT_CHAR_HASH         ((ecma_char_t) '#')  /* hash */
 #endif //} JERRY_SAOLANG
 
 /*
