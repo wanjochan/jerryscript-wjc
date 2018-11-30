@@ -122,7 +122,6 @@ typedef enum
   LEXER_ARROW,                   /**< "=>" */
 #endif /* !CONFIG_DISABLE_ES2015_ARROW_FUNCTION */
 
-#ifndef CONFIG_DISABLE_SAOLANG_ONLY //{
   LEXER_KEYW_BREAK,              /**< break */
   LEXER_KEYW_DO,                 /**< do */
   LEXER_KEYW_CASE,               /**< case  */
@@ -205,11 +204,11 @@ typedef enum
 #ifdef CONFIG_DISABLE_ES2015
   LEXER_KEYW_STATIC,             /**< static */
 #endif /* CONFIG_DISABLE_ES2015 */
-#endif /*} CONFIG_DISABLE_SAOLANG_ONLY */
 
-#ifndef CONFIG_DISABLE_SAOLANG //{
+#ifdef JERRY_SAOLANG//{
   LEXER_AT,                      /**< @ */
-#endif /*} CONFIG_DISABLE_SAOLANG */
+	LEXER_KEYW_ELSEIF,             /**< elseif */
+#endif //}JERRY_SAOLANG
 
 } lexer_token_type_t;
 

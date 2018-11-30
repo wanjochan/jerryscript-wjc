@@ -315,6 +315,8 @@ typedef struct
 /**
  * Keywords with 2 characters.
  */
+#if defined JERRY_SAOLANG_ONLY && JERRY_SAOLANG_ONLY //{
+#else //}:{
 static const keyword_string_t keywords_with_length_2[] =
 {
   LEXER_KEYWORD ("do", LEXER_KEYW_DO),
@@ -454,6 +456,7 @@ static const uint8_t keyword_lengths_list[] =
   LEXER_KEYWORD_LIST_LENGTH (keywords_with_length_9),
   LEXER_KEYWORD_LIST_LENGTH (keywords_with_length_10)
 };
+#endif //} ! JERRY_SAOLANG_ONLY
 
 #undef LEXER_KEYWORD
 #undef LEXER_KEYWORD_LIST_LENGTH
@@ -545,6 +548,9 @@ lexer_parse_identifier (parser_context_t *context_p, /**< context */
   }
 
   /* Check keywords (Only if there is no \u escape sequence in the pattern). */
+#if defined JERRY_SAOLANG_ONLY && JERRY_SAOLANG_ONLY //{
+	check_keywords=false;
+#else //}:{
   if (check_keywords
       && !context_p->token.lit_location.has_escape
       && (length >= 2 && length <= 10))
@@ -596,7 +602,7 @@ lexer_parse_identifier (parser_context_t *context_p, /**< context */
     }
     while (start < end);
   }
-
+#endif //}
   if (context_p->token.type == LEXER_LITERAL)
   {
     /* Fill literal data. */
@@ -1135,7 +1141,7 @@ lexer_next_token (parser_context_t *context_p) /**< context */
 
   switch (context_p->source_p[0])
   {
-#ifndef CONFIG_DISABLE_SAOLANG //{
+#ifdef JERRY_SAOLANG//{
 		case (uint8_t) LIT_CHAR_AT:
 		{
 			if (context_p->source_p[1] == (uint8_t) LIT_CHAR_QUESTION)
@@ -1144,12 +1150,20 @@ lexer_next_token (parser_context_t *context_p) /**< context */
 				length = 2;
 				break;
 			}else if(context_p->source_p[1] == (uint8_t) LIT_CHAR_COLON){
-				context_p->token.type = LEXER_KEYW_ELSE;
-				length = 2;
-				break;
+				if(context_p->source_p[2] == (uint8_t) LIT_CHAR_QUESTION){
+					//TODO ELSEIF
+					parser_raise_error (context_p, PARSER_ERR_SYNTAX_UNSUPPORTED_YET);
+					//context_p->token.type = LEXER_KEYW_ELSEIF;
+					//length = 2;
+					break;
+				}else{
+					context_p->token.type = LEXER_KEYW_ELSE;
+					length = 2;
+					break;
+				}
 			}
 		}
-#endif /*} CONFIG_DISABLE_SAOLANG */
+#endif // JERRY_SAOLANG
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_BRACE, LEXER_LEFT_BRACE);
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_PAREN, LEXER_LEFT_PAREN);
     LEXER_TYPE_A_TOKEN (LIT_CHAR_LEFT_SQUARE, LEXER_LEFT_SQUARE);

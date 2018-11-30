@@ -1052,6 +1052,12 @@ parser_error_to_string (parser_error_t error) /**< error code */
     {
       return "Non-strict argument definition.";
     }
+#ifdef JERRY_SAOLANG//{
+    case PARSER_ERR_SYNTAX_UNSUPPORTED_YET:
+    {
+      return "Syntax not yet supported.";
+    }
+#endif //}
     default:
     {
       JERRY_ASSERT (error == PARSER_ERR_NO_ERROR);

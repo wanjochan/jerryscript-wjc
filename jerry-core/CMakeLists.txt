@@ -39,6 +39,8 @@ set(FEATURE_SYSTEM_ALLOCATOR   OFF     CACHE BOOL   "Enable system allocator?")
 set(FEATURE_VALGRIND           OFF     CACHE BOOL   "Enable Valgrind support?")
 set(FEATURE_VM_EXEC_STOP       OFF     CACHE BOOL   "Enable VM execution stopping?")
 set(MEM_HEAP_SIZE_KB           "512"   CACHE STRING "Size of memory heap, in kilobytes")
+set(FEATURE_SAOLANG            OFF     CACHE BOOL   "Enable SaoLang Syntax?")
+set(FEATURE_SAOLANG_ONLY       OFF     CACHE BOOL   "Enable SaoLang Syntax Only?")
 
 # Option overrides
 if(USING_MSVC)
@@ -94,6 +96,8 @@ message(STATUS "FEATURE_SYSTEM_ALLOCATOR    " ${FEATURE_SYSTEM_ALLOCATOR})
 message(STATUS "FEATURE_VALGRIND            " ${FEATURE_VALGRIND})
 message(STATUS "FEATURE_VM_EXEC_STOP        " ${FEATURE_VM_EXEC_STOP})
 message(STATUS "MEM_HEAP_SIZE_KB            " ${MEM_HEAP_SIZE_KB})
+message(STATUS "FEATURE_SAOLANG             " ${FEATURE_SAOLANG})
+message(STATUS "FEATURE_SAOLANG_ONLY        " ${FEATURE_SAOLANG_ONLY})
 
 # Include directories
 set(INCLUDE_CORE_PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/include")
@@ -266,6 +270,14 @@ endif()
 if(FEATURE_VALGRIND)
   set(DEFINES_JERRY ${DEFINES_JERRY} JERRY_VALGRIND)
   set(INCLUDE_CORE_PRIVATE ${INCLUDE_CORE_PRIVATE} ${INCLUDE_THIRD_PARTY_VALGRIND})
+endif()
+
+# SaoLang
+if(FEATURE_SAOLANG)
+	set(DEFINES_JERRY ${DEFINES_JERRY} JERRY_SAOLANG)
+endif()
+if(FEATURE_SAOLANG_ONLY)
+	set(DEFINES_JERRY ${DEFINES_JERRY} JERRY_SAOLANG_ONLY)
 endif()
 
 # Enable VM execution stopping

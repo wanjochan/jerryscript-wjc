@@ -123,6 +123,9 @@ typedef enum
   PARSER_ERR_DUPLICATED_ARGUMENT_NAMES,               /**< duplicated argument names */
 #endif /* !CONFIG_DISABLE_ES2015_FUNCTION_PARAMETER_INITIALIZER */
   PARSER_ERR_OBJECT_PROPERTY_REDEFINED,               /**< property of object literal redefined */
+#ifdef JERRY_SAOLANG//{
+  PARSER_ERR_SYNTAX_UNSUPPORTED_YET,                  /**< syntax not yet supported */
+#endif //} JERRY_SAOLANG
   PARSER_ERR_NON_STRICT_ARG_DEFINITION                /**< non-strict argument definition */
 } parser_error_t;
 

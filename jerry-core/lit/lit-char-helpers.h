@@ -107,9 +107,9 @@ bool lit_char_is_identifier_part_character (ecma_char_t chr);
 #define LIT_CHAR_QUESTION     ((ecma_char_t) '?') /* question mark */
 #define LIT_CHAR_COLON        ((ecma_char_t) ':') /* colon */
 
-#ifndef CONFIG_DISABLE_SAOLANG //{
+#ifdef JERRY_SAOLANG//{
 #define LIT_CHAR_AT           ((ecma_char_t) '@') /* AT */
-#endif /*} CONFIG_DISABLE_SAOLANG */
+#endif //} JERRY_SAOLANG
 
 /*
  * Special characters for String.prototype.replace.

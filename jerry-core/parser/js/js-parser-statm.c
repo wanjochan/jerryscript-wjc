@@ -58,6 +58,9 @@ typedef enum
   PARSER_STATEMENT_LABEL,
   PARSER_STATEMENT_IF,
   PARSER_STATEMENT_ELSE,
+#ifdef JERRY_SAOLANG //{
+  PARSER_STATEMENT_ELSEIF,
+#endif //} //JERRY_SAOLANG
   /* From switch -> for-in : break target statements */
   PARSER_STATEMENT_SWITCH,
   PARSER_STATEMENT_SWITCH_NO_DEFAULT,
@@ -191,6 +194,11 @@ parser_statement_length (uint8_t type) /**< type of statement */
     (uint8_t) (sizeof (parser_if_else_statement_t) + 1),
     /* PARSER_STATEMENT_ELSE */
     (uint8_t) (sizeof (parser_if_else_statement_t) + 1),
+		//TODO
+//#ifdef JERRY_SAOLANG //{
+//    /* PARSER_STATEMENT_ELSEIF */
+//    (uint8_t) (sizeof (parser_if_else_statement_t) + 1),
+//#endif //} JERRY_SAOLANG
     /* PARSER_STATEMENT_SWITCH */
     (uint8_t) (sizeof (parser_switch_statement_t) + sizeof (parser_loop_statement_t) + 1),
     /* PARSER_STATEMENT_SWITCH_NO_DEFAULT */
@@ -2220,7 +2228,24 @@ parser_parse_statements (parser_context_t *context_p) /**< context */
           parser_set_branch_to_current_position (context_p, &else_statement.branch);
           continue;
         }
-
+				//TODO
+//#ifdef JERRY_SAOLANG//{
+//        case PARSER_STATEMENT_ELSEIF:
+//        {
+//          parser_if_else_statement_t else_statement;
+//
+//          parser_stack_pop_uint8 (context_p);
+//          parser_stack_pop (context_p, &else_statement, sizeof (parser_if_else_statement_t));
+//          parser_stack_iterator_init (context_p, &context_p->last_statement);
+//
+//          parser_set_branch_to_current_position (context_p, &else_statement.branch);
+//          if (parser_parse_if_statement_end (context_p))
+//          {
+//            break;
+//          }
+//          continue;
+//        }
+//#endif //}
         case PARSER_STATEMENT_DO_WHILE:
         {
           parser_parse_do_while_statement_end (context_p);

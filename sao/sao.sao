@@ -1,11 +1,20 @@
-//if(true){
-//	print ("YES JerryScript-x-Sao!");
-//}else{
-//	print ("NO JerryScript-x-Sao!");
-//}
+//TODO make Math with import later...
 
-@?(true){
-	print ("SAO YES JerryScript-x-Sao!");
-}@:{
-	print ("SAO NO JerryScript-x-Sao!");
-}
+ttt = (x, y)=>1.0*Math.pow(x+y,0.5);//sqrt
+
+f = (c)=>{
+	print("c="+c+":");
+	@?(c==1){
+		print ("IF BR");
+	}@:@?(c==2){
+		print ("ELSE IF BR");
+	}@:{
+		print ("ELSE BR");
+	}
+};
+
+f(1);
+f(2);
+f(3);
+
+print(ttt(3.0*3.0,4.0*4.0));

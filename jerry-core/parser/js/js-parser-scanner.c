@@ -487,6 +487,9 @@ parser_scan_statement (parser_context_t *context_p, /**< context */
     {
       return false;
     }
+#ifdef JERRY_SAOLANG //{
+    case LEXER_KEYW_ELSEIF:
+#endif //}JERRY_SAOLANG
     case LEXER_KEYW_IF:
     case LEXER_KEYW_WHILE:
     case LEXER_KEYW_WITH:
@@ -521,6 +524,9 @@ parser_scan_statement (parser_context_t *context_p, /**< context */
       }
       return true;
     }
+		//TODO es2015 const/let
+    //case LEXER_KEYW_CONST:
+    //case LEXER_KEYW_LET:
     case LEXER_KEYW_VAR:
     case LEXER_KEYW_THROW:
     {
